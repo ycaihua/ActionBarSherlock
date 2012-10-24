@@ -6,6 +6,7 @@ lint.xml
 #Eclipse
 .settings
 .checkstyle
+.classpath
 
 #IntelliJ IDEA
 .idea
