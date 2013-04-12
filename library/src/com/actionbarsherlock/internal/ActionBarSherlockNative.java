@@ -1,19 +1,20 @@
 package com.actionbarsherlock.internal;
 
-import com.actionbarsherlock.ActionBarSherlock;
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.internal.app.ActionBarWrapper;
-import com.actionbarsherlock.internal.view.menu.MenuWrapper;
-import com.actionbarsherlock.view.ActionMode;
-import com.actionbarsherlock.view.MenuInflater;
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.ContextThemeWrapper;
 import android.view.View;
-import android.view.Window;
 import android.view.ViewGroup.LayoutParams;
+import android.view.Window;
+
+import com.actionbarsherlock.ActionBarSherlock;
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.internal.app.ActionBarWrapper;
+import com.actionbarsherlock.internal.view.menu.MenuWrapper;
+import com.actionbarsherlock.view.ActionMode;
+import com.actionbarsherlock.view.MenuInflater;
 
 @ActionBarSherlock.Implementation(api = 14)
 public class ActionBarSherlockNative extends ActionBarSherlock {
@@ -75,7 +76,7 @@ public class ActionBarSherlockNative extends ActionBarSherlock {
     public boolean dispatchOptionsItemSelected(android.view.MenuItem item) {
         if (DEBUG) Log.d(TAG, "[dispatchOptionsItemSelected] item: " + item.getTitleCondensed());
 
-        final boolean result = callbackOptionsItemSelected(mMenu.findItem(item));
+        final boolean result = ( mMenu == null ? false : callbackOptionsItemSelected(mMenu.findItem(item)));
         if (DEBUG) Log.d(TAG, "[dispatchOptionsItemSelected] returning " + result);
         return result;
     }
