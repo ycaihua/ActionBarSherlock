@@ -8,15 +8,7 @@ import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
-<<<<<<< HEAD:library/src/com/actionbarsherlock/internal/ActionBarSherlockNative.java
 
-import com.actionbarsherlock.ActionBarSherlock;
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.internal.app.ActionBarWrapper;
-import com.actionbarsherlock.internal.view.menu.MenuWrapper;
-import com.actionbarsherlock.view.ActionMode;
-import com.actionbarsherlock.view.MenuInflater;
-=======
 import com.actionbarsherlock.ActionBarSherlock;
 import com.actionbarsherlock.BuildConfig;
 import com.actionbarsherlock.app.ActionBar;
@@ -26,7 +18,6 @@ import com.actionbarsherlock.internal.view.menu.MenuWrapper;
 import com.actionbarsherlock.view.ActionMode;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
->>>>>>> upstream/master:actionbarsherlock/src/com/actionbarsherlock/internal/ActionBarSherlockNative.java
 
 @ActionBarSherlock.Implementation(api = 14)
 public class ActionBarSherlockNative extends ActionBarSherlock {
