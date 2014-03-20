@@ -64,10 +64,10 @@ afterEvaluate { project ->
             }
 
             pom.project {
-                name 'Hockey SDK for Android'
+                name 'ActionBarSherlock'
                 packaging 'aar'
-                description 'The hockey sdk for android'
-                url 'https://github.com/foursquare/HockeySDK-Android'
+                description 'ActionBarSherlock support library'
+                url 'https://github.com/foursquare/ActionBarSherlock'
 
                 scm {
                     url 'scm:git@github.com:foursquare/ActionBarSherlock.git'
