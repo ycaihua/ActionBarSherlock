@@ -1,0 +1,107 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.9.+'
+    }
+}
+
+apply plugin: 'android-library'
+
+dependencies {
+    compile 'com.android.support:support-v4:19.0.+'
+}
+
+android {
+    compileSdkVersion 17
+    buildToolsVersion "19.0.0"
+
+    sourceSets {
+        main {
+            manifest.srcFile 'actionbarsherlock/AndroidManifest.xml'
+            java.srcDirs = ['actionbarsherlock/src']
+            resources.srcDirs = ['actionbarsherlock/src']
+            aidl.srcDirs = ['actionbarsherlock/src']
+            renderscript.srcDirs = ['actionbarsherlock/src']
+            res.srcDirs = ['actionbarsherlock/res']
+            assets.srcDirs = ['actionbarsherlock/assets']
+        }
+
+        // Move the tests to tests/java, tests/res, etc...
+        instrumentTest.setRoot('actionbarsherlock/test')
+        debug.setRoot('actionbarsherlock/build-types/debug')
+        release.setRoot('actionbarsherlock/build-types/release')
+    }
+}
+
+apply plugin: 'maven'
+//apply plugin: 'sigining'
+
+version = "0.0.1"
+group = "com.actionbarsherlock"
+
+configurations {
+    archives {
+        extendsFrom configurations.default
+    }
+}
+
+//signing {
+//    required { has("release") && gradle.taskGraph.hasTask("uploadArchives") }
+//    sign configurations.archives
+//}
+
+afterEvaluate { project ->
+    uploadArchives {
+        configuration = configurations.archives
+        repositories.mavenDeployer {
+            //beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: NEXUS_URL) {
+                authentication(userName: NEXUS_USERNAME,
+                        password: NEXUS_PASSWORD)
+            }
+
+            pom.project {
+                name 'Hockey SDK for Android'
+                packaging 'aar'
+                description 'The hockey sdk for android'
+                url 'https://github.com/foursquare/HockeySDK-Android'
+
+                scm {
+                    url 'scm:git@github.com:foursquare/ActionBarSherlock.git'
+                    connection 'scm:git@github.com:foursquare/ActionBarSherlock.git'
+                    developerConnection 'scm:git@github.com:foursquare/ActionBarSherlock.git'
+                }
+
+                developers {
+                    developer {
+                        id 'kylefowler'
+                        name 'Kyle Fowler'
+                        email 'kyle.e.fowler@gmail.com'
+                    }
+                }
+            }
+        }
+    }
+
+    /*task androidJavadocs(type: Javadoc) {
+        source = android.sourceSets.main.allJava
+    }
+
+    task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
+        classifier = 'javadoc'
+        from androidJavadocs.destinationDir
+    }*/
+
+    task androidSourcesJar(type: Jar) {
+        classifier = 'sources'
+        from android.sourceSets.main.allSource
+    }
+
+    artifacts {
+        archives androidSourcesJar
+        //archives androidJavadocsJar
+    }
+}
